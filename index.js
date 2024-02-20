@@ -74,7 +74,9 @@ let sendToTelegram = async (url, status, body) => {
 
 }
 app.get("/",async (req, res)=>{
-  return res.html(`<a href="/send-telegram">send-telegram</a>`)
+  return res.json({
+
+  })
 })
 app.get('/send-telegram', async (req, res) => {
   let curl = await sendToTelegram('No url', 0, 'Check send-notification')
