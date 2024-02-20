@@ -6,6 +6,7 @@ const fs = require('fs')
 let isRun = false
 const port = process.env.PORT || 3003
 let last = {}
+let error = {}
 cron.schedule('* * * * *', () => {
   if (isRun) {
     return
@@ -44,7 +45,10 @@ async function request (item) {
   last = ({
     url: item.url,
     status: curl.status,
-    time: new Date().toString()
+    time: new Date().toString(),
+    error:{
+      ...error
+    }
   })
   return true
 }
@@ -68,10 +72,11 @@ let sendToTelegram = async (url, status, body) => {
       body: await curl.text()
     }
   } catch (e) {
-    return {
+    error =  {
       status: 'error',
       body: e.message
     }
+    return error
   }
 
 }
