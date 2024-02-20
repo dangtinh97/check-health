@@ -1,0 +1,44 @@
+[
+  {
+    "url": "https://api.dev.hifriend.site/calls/login",
+    "config": {
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "body": "{\"token_verify\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..kSpGX43LkEgha0k_RcQtcZ6aBpTwHQcWPoaEX4RvnYM\",\"uid_device\":\"123\",\"token\":\"122\"}"
+    }
+  },
+  {
+    "url": "https://api.hifriend.site/login",
+    "config": {
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "body": "{\"token_verify\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..kSpGX43LkEgha0k_RcQtcZ6aBpTwHQcWPoaEX4RvnYM\",\"uid_device\":\"123\",\"token\":\"122\"}"
+    }
+  },
+  {
+    "url": "https://api.hifriend.site/calls/login",
+    "config": {
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "body": "{\"token_verify\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..kSpGX43LkEgha0k_RcQtcZ6aBpTwHQcWPoaEX4RvnYM\",\"uid_device\":\"123\",\"token\":\"122\"}"
+    }
+  },
+  {
+    "url": "https://api-videocall.locamos.com/api/config",
+    "config": {
+      "method": "GET"
+    }
+  },
+  {
+    "url": "https://gift-prod.locamos.com/setup-app",
+    "config": {
+      "method": "GET"
+    }
+  }
+]
