@@ -5,6 +5,7 @@ var cron = require('node-cron')
 const fs = require('fs')
 let isRun = false
 const port = process.env.PORT || 3003
+let last = {}
 cron.schedule('* * * * *', () => {
   if (isRun) {
     return
@@ -40,9 +41,10 @@ async function request (item) {
   if (!curl.ok) {
     await sendToTelegram(item.url, status, body)
   }
-  console.log({
+  last = ({
     url: item.url,
-    status: curl.status
+    status: curl.status,
+    time: new Date().toString()
   })
   return true
 }
@@ -74,9 +76,7 @@ let sendToTelegram = async (url, status, body) => {
 
 }
 app.get("/",async (req, res)=>{
-  return res.json({
-
-  })
+  return res.json(last)
 })
 app.get('/send-telegram', async (req, res) => {
   let curl = await sendToTelegram('No url', 0, 'Check send-notification')
