@@ -6,6 +6,7 @@ services:
       dockerfile: Dockerfile
     ports:
       - "3003:3003"
+    restart: on-failure
 #  nginx:
 #    image: nginx:latest
 #    volumes:

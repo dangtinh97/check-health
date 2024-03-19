@@ -36,21 +36,27 @@ async function sleep (second) {
 }
 
 async function request (item) {
-  let curl = await fetch(item.url, item.config)
-  let status = curl.status
-  let body = await curl.text()
-  if (!curl.ok) {
-    await sendToTelegram(item.url, status, body)
-  }
-  last = ({
-    url: item.url,
-    status: curl.status,
-    time: new Date().toString(),
-    error:{
-      ...error
+  try {
+    let curl = await fetch(item.url, item.config)
+    let status = curl.status
+    let body = await curl.text()
+    if (!curl.ok) {
+      await sendToTelegram(item.url, status, body)
     }
-  })
-  return true
+    last = ({
+      url: item.url,
+      status: curl.status,
+      time: new Date().toString(),
+      error: {
+        ...error
+      }
+    })
+    return true
+  } catch (e) {
+    await sendToTelegram(item.url, 0, e.message)
+    return false
+  }
+
 }
 
 let sendToTelegram = async (url, status, body) => {
@@ -72,7 +78,7 @@ let sendToTelegram = async (url, status, body) => {
       body: await curl.text()
     }
   } catch (e) {
-    error =  {
+    error = {
       status: 'error',
       body: e.message
     }
@@ -80,7 +86,7 @@ let sendToTelegram = async (url, status, body) => {
   }
 
 }
-app.get("/",async (req, res)=>{
+app.get('/', async (req, res) => {
   return res.json(last)
 })
 app.get('/send-telegram', async (req, res) => {
