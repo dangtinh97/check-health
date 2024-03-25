@@ -21,6 +21,9 @@ async function runCron () {
   const data = JSON.parse(file.toString())
   for (const item of data) {
     console.log(`Run with:${item.url}`)
+    if (!item.run) {
+      continue
+    }
     await request(item)
     await sleep(3)
   }

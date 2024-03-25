@@ -1,6 +1,7 @@
 [
   {
     "url": "https://api.dev.hifriend.site/calls/login",
+    "run": false,
     "config": {
       "method": "POST",
       "headers": {
@@ -11,6 +12,7 @@
   },
   {
     "url": "https://api.hifriend.site/login",
+    "run": true,
     "config": {
       "method": "POST",
       "headers": {
@@ -21,6 +23,7 @@
   },
   {
     "url": "https://api.hifriend.site/calls/login",
+    "run": true,
     "config": {
       "method": "POST",
       "headers": {
@@ -31,12 +34,14 @@
   },
   {
     "url": "https://api-videocall.locamos.com/api/config",
+    "run": true,
     "config": {
       "method": "GET"
     }
   },
   {
     "url": "https://gift-prod.locamos.com/setup-app",
+    "run": true,
     "config": {
       "method": "GET"
     }
