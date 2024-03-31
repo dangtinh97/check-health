@@ -1,12 +1,24 @@
 require('dotenv').config()
 const express = require('express')
 const app = express()
+app.use(express.json());
+app.use(cors())
 var cron = require('node-cron')
 const fs = require('fs')
 let isRun = false
 const port = process.env.PORT || 3003
 let last = {}
 let error = {}
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+const SchemaGreeting = new Schema({
+  full_name: String,
+  email: String,
+  content: String
+},{
+  timestamps:true
+});
+
 cron.schedule('* * * * *', () => {
   if (isRun) {
     return
@@ -96,6 +108,22 @@ app.get('/send-telegram', async (req, res) => {
   let curl = await sendToTelegram('No url', 0, 'Check send-notification')
   return res.json(curl)
 })
+
+app.post('/iwedding',async (req, res)=>{
+  const uri = "mongodb+srv://dangtinha2:qJyuQQhZG3dZuj4W@youpip.nnuyco1.mongodb.net/?retryWrites=true&w=majority&appName=youpip";
+  await mongoose.connect(uri);
+  const Greeting = mongoose.model('Greeting',SchemaGreeting,'wedding_greetings')
+  const model = new Greeting({
+    full_name: req.body.full_name,
+    content: req.body.content,
+    email: req.body.email
+  });
+  await model.save();
+  return res.json({
+    content:''
+  })
+})
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
