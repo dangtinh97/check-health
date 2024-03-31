@@ -125,6 +125,18 @@ app.post('/iwedding',async (req, res)=>{
   })
 })
 
+app.get('/iwedding',async (req, res)=>{
+  const uri = "mongodb+srv://dangtinha2:qJyuQQhZG3dZuj4W@youpip.nnuyco1.mongodb.net/?retryWrites=true&w=majority&appName=youpip";
+  await mongoose.connect(uri);
+  const Greeting = mongoose.model('Greeting',SchemaGreeting,'wedding_greetings')
+  const list = Greeting.find().then((list)=>{
+    return res.json({
+      list:list.reverse()
+    })
+  })
+
+})
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
